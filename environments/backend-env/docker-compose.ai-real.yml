@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  ai-service-real:
+    image: ${AI_IMAGE:-ghcr.io/lamhoanghai-dang1911/ix-voice-ai:latest}
+    container_name: ix-voice-ai-service-real
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - AI_SERVICE_PORT=5000
+      - PIPELINE_MODE=real
+      - DEVICE=cpu
+      - COMPUTE_TYPE=int8
+      - HF_MODEL_ID=ntgiaky/faster-PhoWhisper-small
+    volumes:
+      - ai_models_cache:/app/data/models
+
+volumes:
+  ai_models_cache:
+    driver: local
