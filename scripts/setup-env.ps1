@@ -3,7 +3,7 @@ param (
     [ValidateSet("frontend", "backend", "ai")]
     [string]$Role,
 
-    [string]$TargetDir = ".."
+    [string]$TargetDir = "."
 )
 
 $ErrorActionPreference = "Stop"
@@ -27,7 +27,14 @@ if (-not $Role) {
 }
 
 $scriptDir = (Split-Path -Parent $PSScriptRoot).Replace("\", "/")
-$targetAbs = (Resolve-Path $TargetDir).Path.Replace("\", "/")
+$currentLoc = (Get-Location).Path.Replace("\", "/")
+if ($currentLoc.EndsWith("/devkit/scripts")) {
+    $targetAbs = (Resolve-Path "../..").Path.Replace("\", "/")
+} elseif ($currentLoc.EndsWith("/devkit")) {
+    $targetAbs = (Resolve-Path "..").Path.Replace("\", "/")
+} else {
+    $targetAbs = (Resolve-Path $TargetDir).Path.Replace("\", "/")
+}
 
 Write-Host "`n[*] Role duoc chon: $Role" -ForegroundColor Green
 Write-Host "[*] Thu muc repo muc tieu: $targetAbs" -ForegroundColor Green
