@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://integrix.vn/schemas/evidence_qa_v0_1.json",
+  "title": "EvidenceQAV01",
+  "description": "Canonical contract for Human QA Review, Evidence verification and Decision Audit State",
+  "type": "object",
+  "required": ["jobId", "reviewId", "auditState", "reviewer", "reviewedAt", "decision", "policyDocRefs"],
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "reviewId": {
+      "type": "string"
+    },
+    "auditState": {
+      "type": "string",
+      "enum": [
+        "PENDING_REVIEW",
+        "IN_REVIEW",
+        "APPROVED",
+        "FLAGGED_FOR_CORRECTION",
+        "REJECTED"
+      ]
+    },
+    "reviewer": {
+      "type": "object",
+      "required": ["userId", "fullName", "role"],
+      "properties": {
+        "userId": { "type": "string" },
+        "fullName": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    },
+    "reviewedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_ACTIONS", "FAIL"]
+    },
+    "decisionNotes": {
+      "type": "string"
+    },
+    "checklistOverrides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["checklistId", "originalAiStatus", "reviewerStatus", "reason"],
+        "properties": {
+          "checklistId": { "type": "string" },
+          "originalAiStatus": { "type": "boolean" },
+          "reviewerStatus": { "type": "boolean" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "policyDocRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["docId", "title", "version"],
+        "properties": {
+          "docId": { "type": "string" },
+          "title": { "type": "string" },
+          "version": { "type": "string" },
+          "effectiveDate": { "type": "string" }
+        }
+      }
+    }
+  }
+}

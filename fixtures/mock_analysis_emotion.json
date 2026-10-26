@@ -1,0 +1,74 @@
+{
+  "jobId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "summary": "Cuộc gọi tư vấn sản phẩm bảo hiểm liên kết đầu tư PRU-Đầu Tư Linh Hoạt. Tư vấn viên đã thực hiện đầy đủ quy trình chào hỏi, thông báo ghi âm, giải thích quyền lợi bảo hiểm và minh bạch rủi ro đầu tư không cam kết lãi suất cố định. Khách hàng thể hiện sự hiểu biết rõ về 21 ngày cân nhắc và yêu cầu gửi bảng minh họa quyền lợi qua email.",
+  "meetingMinutes": [
+    {
+      "title": "Mục đích cuộc gọi",
+      "content": "Tư vấn sản phẩm liên kết đơn vị PRU-Đầu Tư Linh Hoạt theo yêu cầu đăng ký của khách hàng.",
+      "actionItems": ["Gửi bảng minh họa quyền lợi tài chính qua email của khách hàng trong ngày hôm nay."]
+    },
+    {
+      "title": "Nội dung giải thích rủi ro và quyền lợi",
+      "content": "Làm rõ tính chất biến động theo thị trường của quỹ liên kết và quyền 21 ngày cân nhắc dùng thử.",
+      "actionItems": []
+    }
+  ],
+  "topics": [
+    "Giới thiệu danh tính & thông báo ghi âm",
+    "PRU-Đầu Tư Linh Hoạt",
+    "Rủi ro không cam kết lãi suất cố định",
+    "Quyền 21 ngày cân nhắc hợp đồng",
+    "Gửi bảng minh họa qua email"
+  ],
+  "checklistResults": [
+    {
+      "checklistId": "CHK-01-GREETING-RECORDING",
+      "title": "Chào hỏi danh xưng và thông báo ghi âm cuộc gọi",
+      "passed": true,
+      "policyDocId": "DOC-PRUDENTIAL-COMPLIANCE-2026",
+      "policyVersion": "v1.2",
+      "policySection": "Mục 1.1: Tiêu chuẩn mở đầu cuộc gọi tư vấn",
+      "evidenceSegmentIds": ["seg-001"],
+      "findings": "Tư vấn viên đã xưng tên, nêu rõ đơn vị Prudential và thông báo cuộc gọi được ghi âm để nâng cao chất lượng dịch vụ."
+    },
+    {
+      "checklistId": "CHK-02-INVESTMENT-RISK-DISCLOSURE",
+      "title": "Minh bạch rủi ro: Kết quả đầu tư không được cam kết",
+      "passed": true,
+      "policyDocId": "DOC-PRUDENTIAL-PRU-DAUTULINHHOAT-TC",
+      "policyVersion": "v2.0",
+      "policySection": "Điều khoản 4.3: Rủi ro đầu tư và không bảo lãnh lợi nhuận",
+      "evidenceSegmentIds": ["seg-004", "seg-005"],
+      "findings": "Đã giải thích rõ kết quả đầu tư phụ thuộc thị trường, không bảo lãnh cam kết lãi suất; khách hàng xác nhận đã hiểu."
+    },
+    {
+      "checklistId": "CHK-03-COOLING-OFF-PERIOD",
+      "title": "Tư vấn quyền 21 ngày cân nhắc của khách hàng",
+      "passed": true,
+      "policyDocId": "DOC-PRUDENTIAL-PRU-DAUTULINHHOAT-TC",
+      "policyVersion": "v2.0",
+      "policySection": "Điều khoản 9: Quyền từ chối tham gia trong thời gian cân nhắc",
+      "evidenceSegmentIds": ["seg-006"],
+      "findings": "Đã thông báo rõ ràng thời gian 21 ngày cân nhắc từ khi nhận bộ hợp đồng và quyền hủy nhận lại phí."
+    }
+  ],
+  "emotionSignals": {
+    "disclaimer": "Lưu ý: Tín hiệu Emotion & Interaction chỉ là chỉ báo hỗ trợ cho công tác QA và coaching; không phải kết luận chắc chắn về cảm xúc, ý định hay phẩm chất cá nhân.",
+    "acousticFeatures": {
+      "speechRateWpm": 138.4,
+      "silenceRatio": 0.12,
+      "interruptionCount": 0,
+      "pitchVariabilityHz": 28.5
+    },
+    "linguisticTone": "POLITE_COLLABORATIVE",
+    "uncertaintyScore": 0.15,
+    "flaggedMoments": [
+      {
+        "segmentId": "seg-005",
+        "indicator": "HESITATION_QUERY",
+        "observation": "Khách hàng ngập ngừng hỏi lại về rủi ro tăng giảm; đã được tư vấn viên giải đáp cởi mở ngay sau đó.",
+        "confidence": 0.78
+      }
+    ]
+  }
+}

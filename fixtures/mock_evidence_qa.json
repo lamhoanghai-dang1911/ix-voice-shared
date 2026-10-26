@@ -1,0 +1,28 @@
+{
+  "jobId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "reviewId": "rev-20261022-0042",
+  "auditState": "APPROVED",
+  "reviewer": {
+    "userId": "qa-bachsy-01",
+    "fullName": "Bách Sỹ",
+    "role": "QA & Compliance Reviewer"
+  },
+  "reviewedAt": "2026-10-22T08:45:00Z",
+  "decision": "PASS",
+  "decisionNotes": "Cuộc gọi mẫu đạt chuẩn 100% các tiêu chí tuân thủ cơ bản theo tài liệu tham chiếu PRU-Đầu Tư Linh Hoạt. Tư vấn viên giải thích rủi ro minh bạch, không phát hiện vi phạm hứa hẹn lợi nhuận ảo.",
+  "checklistOverrides": [],
+  "policyDocRefs": [
+    {
+      "docId": "DOC-PRUDENTIAL-COMPLIANCE-2026",
+      "title": "Quy chế Tiêu chuẩn Tư vấn Viên Bảo hiểm",
+      "version": "v1.2",
+      "effectiveDate": "2026-01-01"
+    },
+    {
+      "docId": "DOC-PRUDENTIAL-PRU-DAUTULINHHOAT-TC",
+      "title": "Quy tắc và Điều khoản Sản phẩm PRU-Đầu Tư Linh Hoạt",
+      "version": "v2.0",
+      "effectiveDate": "2026-03-15"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "ix-voice-contracts",
+  "version": "0.1.0",
+  "description": "Canonical contracts and schemas for INTEGRIX IX.VOICE",
+  "main": "index.js",
+  "scripts": {
+    "codegen": "powershell -ExecutionPolicy Bypass -File ./scripts/codegen.ps1"
+  },
+  "keywords": ["contracts", "schemas", "ix-voice", "json-schema"],
+  "author": "INTEGRIX Architecture Team",
+  "license": "UNLICENSED"
+}

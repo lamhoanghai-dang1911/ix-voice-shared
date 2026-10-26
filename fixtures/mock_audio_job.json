@@ -1,0 +1,17 @@
+{
+  "jobId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "status": "COMPLETED",
+  "progress": 100,
+  "audioMetadata": {
+    "filename": "cuoc_goi_tu_van_prudential_pru_dau_tu_linh_hoat_01.wav",
+    "fileSize": 14205840,
+    "format": "audio/wav",
+    "durationMs": 443000,
+    "sampleRate": 16000,
+    "channels": 1
+  },
+  "traceId": "trace-ix-voice-20261022-001",
+  "errors": [],
+  "createdAt": "2026-10-22T08:30:00Z",
+  "updatedAt": "2026-10-22T08:32:15Z"
+}

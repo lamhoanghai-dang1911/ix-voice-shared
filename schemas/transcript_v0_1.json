@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://integrix.vn/schemas/transcript_v0_1.json",
+  "title": "TranscriptV01",
+  "description": "Canonical contract for timestamped and speaker-attributed Vietnamese transcripts",
+  "type": "object",
+  "required": ["jobId", "modelVersion", "segments", "qualityFlags"],
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "modelVersion": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string",
+      "default": "vi"
+    },
+    "qualityFlags": {
+      "type": "object",
+      "properties": {
+        "snrEstimateDb": { "type": "number" },
+        "lowConfidenceSegmentsCount": { "type": "integer" },
+        "averageConfidence": { "type": "number" }
+      }
+    },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "startMs", "endMs", "speakerId", "speakerLabel", "text", "confidence"],
+        "properties": {
+          "id": { "type": "string" },
+          "startMs": { "type": "integer", "minimum": 0 },
+          "endMs": { "type": "integer", "minimum": 0 },
+          "speakerId": { "type": "string" },
+          "speakerLabel": { "type": "string" },
+          "text": { "type": "string" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "words": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["word", "startMs", "endMs"],
+              "properties": {
+                "word": { "type": "string" },
+                "startMs": { "type": "integer" },
+                "endMs": { "type": "integer" },
+                "confidence": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

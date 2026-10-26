@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://integrix.vn/schemas/analysis_emotion_v0_1.json",
+  "title": "AnalysisEmotionV01",
+  "description": "Canonical contract for Conversation Intelligence, Policy Grounding, and Emotion/Interaction signals",
+  "type": "object",
+  "required": ["jobId", "summary", "meetingMinutes", "topics", "checklistResults", "emotionSignals"],
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "meetingMinutes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "content"],
+        "properties": {
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "actionItems": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "topics": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "checklistResults": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["checklistId", "title", "passed", "policyDocId", "policyVersion", "policySection", "evidenceSegmentIds"],
+        "properties": {
+          "checklistId": { "type": "string" },
+          "title": { "type": "string" },
+          "passed": { "type": "boolean" },
+          "policyDocId": { "type": "string" },
+          "policyVersion": { "type": "string" },
+          "policySection": { "type": "string" },
+          "evidenceSegmentIds": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "findings": { "type": "string" }
+        }
+      }
+    },
+    "emotionSignals": {
+      "type": "object",
+      "required": ["disclaimer", "acousticFeatures", "linguisticTone", "uncertaintyScore"],
+      "properties": {
+        "disclaimer": {
+          "type": "string",
+          "description": "Notice: Signals are supportive indicators for review/coaching only; never absolute conclusions about character or intent."
+        },
+        "acousticFeatures": {
+          "type": "object",
+          "required": ["speechRateWpm", "silenceRatio", "interruptionCount"],
+          "properties": {
+            "speechRateWpm": { "type": "number" },
+            "silenceRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+            "interruptionCount": { "type": "integer", "minimum": 0 },
+            "pitchVariabilityHz": { "type": "number" }
+          }
+        },
+        "linguisticTone": {
+          "type": "string",
+          "enum": ["NEUTRAL", "POLITE_COLLABORATIVE", "HESITANT", "CONCERNED", "TENSE"]
+        },
+        "uncertaintyScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "flaggedMoments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["segmentId", "indicator", "observation", "confidence"],
+            "properties": {
+              "segmentId": { "type": "string" },
+              "indicator": { "type": "string" },
+              "observation": { "type": "string" },
+              "confidence": { "type": "number" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

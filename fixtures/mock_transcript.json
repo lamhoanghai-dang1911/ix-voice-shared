@@ -1,0 +1,75 @@
+{
+  "jobId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "modelVersion": "PhoWhisper-small + pyannote-community-1",
+  "language": "vi",
+  "qualityFlags": {
+    "snrEstimateDb": 24.5,
+    "lowConfidenceSegmentsCount": 0,
+    "averageConfidence": 0.94
+  },
+  "segments": [
+    {
+      "id": "seg-001",
+      "startMs": 1200,
+      "endMs": 6800,
+      "speakerId": "SPEAKER_01",
+      "speakerLabel": "Tư vấn viên",
+      "text": "Dạ em chào anh Nam, em là Minh từ bộ phận tư vấn bảo hiểm Prudential. Cuộc gọi này được ghi âm nhằm mục đích nâng cao chất lượng dịch vụ ạ.",
+      "confidence": 0.98
+    },
+    {
+      "id": "seg-002",
+      "startMs": 7200,
+      "endMs": 9500,
+      "speakerId": "SPEAKER_02",
+      "speakerLabel": "Khách hàng",
+      "text": "Chào Minh, anh có đăng ký tìm hiểu gói bảo hiểm đầu tư bên em hôm qua.",
+      "confidence": 0.96
+    },
+    {
+      "id": "seg-003",
+      "startMs": 10100,
+      "endMs": 18400,
+      "speakerId": "SPEAKER_01",
+      "speakerLabel": "Tư vấn viên",
+      "text": "Dạ vâng, hôm nay em xin phép tư vấn chi tiết về giải pháp PRU-Đầu Tư Linh Hoạt. Gói này vừa có quyền lợi bảo vệ sinh mạng, vừa cho phép anh ủy thác đầu tư vào các quỹ liên kết đơn vị.",
+      "confidence": 0.95
+    },
+    {
+      "id": "seg-004",
+      "startMs": 19200,
+      "endMs": 28600,
+      "speakerId": "SPEAKER_01",
+      "speakerLabel": "Tư vấn viên",
+      "text": "Em xin lưu ý rõ điều khoản quan trọng: Kết quả đầu tư thực tế không được bảo lãnh cam kết lãi suất cố định, lợi nhuận sẽ phụ thuộc vào biến động thị trường tài chính và kết quả hoạt động của quỹ anh lựa chọn ạ.",
+      "confidence": 0.97
+    },
+    {
+      "id": "seg-005",
+      "startMs": 29200,
+      "endMs": 34100,
+      "speakerId": "SPEAKER_02",
+      "speakerLabel": "Khách hàng",
+      "text": "À ra vậy, tức là giá trị tài khoản có thể tăng hoặc giảm theo thị trường đúng không em?",
+      "confidence": 0.93
+    },
+    {
+      "id": "seg-006",
+      "startMs": 34800,
+      "endMs": 44300,
+      "speakerId": "SPEAKER_01",
+      "speakerLabel": "Tư vấn viên",
+      "text": "Dạ chính xác ạ. Ngoài ra, anh có thời gian 21 ngày cân nhắc tính từ ngày nhận bộ hợp đồng bảo hiểm. Trong 21 ngày này, nếu thay đổi ý định anh hoàn toàn có quyền từ chối tham gia và nhận lại phí theo quy định.",
+      "confidence": 0.96
+    },
+    {
+      "id": "seg-007",
+      "startMs": 45000,
+      "endMs": 48200,
+      "speakerId": "SPEAKER_02",
+      "speakerLabel": "Khách hàng",
+      "text": "Rất rõ ràng. Em gửi bảng minh họa quyền lợi qua email cho anh nhé.",
+      "confidence": 0.95
+    }
+  ]
+}

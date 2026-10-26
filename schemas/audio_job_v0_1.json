@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://integrix.vn/schemas/audio_job_v0_1.json",
+  "title": "AudioJobV01",
+  "description": "Canonical contract for audio processing job state in IX.VOICE v0.1",
+  "type": "object",
+  "required": ["jobId", "status", "progress", "audioMetadata", "traceId", "createdAt", "updatedAt"],
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "QUEUED",
+        "VALIDATING",
+        "VAD_PROCESSING",
+        "ASR_DIARIZATION",
+        "NLP_ANALYSIS",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
+    "progress": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "audioMetadata": {
+      "type": "object",
+      "required": ["filename", "fileSize", "format"],
+      "properties": {
+        "filename": { "type": "string" },
+        "fileSize": { "type": "integer" },
+        "format": { "type": "string" },
+        "durationMs": { "type": "integer" },
+        "sampleRate": { "type": "integer" },
+        "channels": { "type": "integer" }
+      }
+    },
+    "traceId": {
+      "type": "string"
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" },
+          "stage": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
