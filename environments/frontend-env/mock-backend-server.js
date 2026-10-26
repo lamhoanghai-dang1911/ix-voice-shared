@@ -36,6 +36,26 @@ const server = http.createServer((req, res) => {
 
     console.log(`[MockBackend] ${req.method} ${url}`);
 
+    // Root Welcome Endpoint
+    if (url === '/') {
+        res.writeHead(200);
+        res.end(JSON.stringify({
+            message: 'IX.VOICE Standalone Mock Backend Server is RUNNING',
+            status: 'HEALTHY',
+            port: PORT,
+            availableEndpoints: [
+                'GET  /api/v1/health',
+                'POST /api/v1/jobs',
+                'GET  /api/v1/jobs/:id',
+                'GET  /api/v1/jobs/:id/transcript',
+                'GET  /api/v1/jobs/:id/analysis',
+                'GET  /api/v1/jobs/:id/qa-review'
+            ],
+            note: 'Connect your React App (npm run dev) to this server'
+        }, null, 2));
+        return;
+    }
+
     // Health
     if (url === '/api/v1/health') {
         res.writeHead(200);
