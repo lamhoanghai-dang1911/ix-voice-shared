@@ -64,8 +64,11 @@ switch ($Role) {
         Write-Host "`n[4/4] Huong dan chay ngay khong can cai Java:" -ForegroundColor Yellow
         Write-Host "  1. Chay Frontend React:" -ForegroundColor White
         Write-Host "     npm run dev" -ForegroundColor Green
-        Write-Host "  2. Bat Mock Backend (tra cuu fixtures chuan):" -ForegroundColor White
-        Write-Host "     node $scriptDir/environments/frontend-env/mock-backend-server.js" -ForegroundColor Green
+        Write-Host "  2. Lua chon Backend de ket noi (KHONG CAN CAI JAVA):" -ForegroundColor White
+        Write-Host "     - Cach A (Mock Backend sieu nhe):" -ForegroundColor Cyan
+        Write-Host "       node $scriptDir/environments/frontend-env/mock-backend-server.js" -ForegroundColor Green
+        Write-Host "     - Cach B (Backend THAT da build san tu GitHub Actions CI):" -ForegroundColor Cyan
+        Write-Host "       docker compose -f $scriptDir/environments/frontend-env/docker-compose.backend-real.yml up -d" -ForegroundColor Green
     }
 
     "backend" {
