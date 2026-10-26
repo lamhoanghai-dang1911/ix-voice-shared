@@ -9,6 +9,5 @@ services:
       - "8080:8080"
     working_dir: /app
     volumes:
-      - ../../fixtures:/fixtures
       - ./mock-backend-server.js:/app/mock-backend-server.js
     command: ["node", "mock-backend-server.js"]

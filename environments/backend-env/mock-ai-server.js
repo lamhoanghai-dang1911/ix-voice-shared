@@ -16,7 +16,18 @@ function loadFixture(filename) {
     if (fs.existsSync(filePath)) {
         return fs.readFileSync(filePath, 'utf8');
     }
-    return JSON.stringify({ error: `Fixture ${filename} not found` });
+    return JSON.stringify({
+        jobId: "00000000-0000-0000-0000-000000000000",
+        modelVersion: "PhoWhisper-small (Mock)",
+        language: "vi",
+        qualityFlags: {
+            snrEstimateDb: 25.0,
+            lowConfidenceSegmentsCount: 0,
+            averageConfidence: 1.0
+        },
+        segments: [],
+        note: "Mock data removed by DevOps. Teams will define domain data."
+    });
 }
 
 const server = http.createServer((req, res) => {

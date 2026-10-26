@@ -16,7 +16,12 @@ function loadFixture(filename) {
     if (fs.existsSync(filePath)) {
         return fs.readFileSync(filePath, 'utf8');
     }
-    return JSON.stringify({ error: `Fixture ${filename} not found` });
+    return JSON.stringify({
+        status: "READY",
+        message: "Mock data removed by DevOps. Teams (FE, BE, AI) will discuss and define domain data.",
+        fixture: filename,
+        data: {}
+    }, null, 2);
 }
 
 const OPENAPI_SPEC = {
