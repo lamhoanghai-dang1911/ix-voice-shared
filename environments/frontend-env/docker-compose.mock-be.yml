@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  mock-backend:
+    image: node:20-alpine
+    container_name: ix-voice-mock-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    working_dir: /app
+    volumes:
+      - ../../fixtures:/fixtures
+      - ./mock-backend-server.js:/app/mock-backend-server.js
+    command: ["node", "mock-backend-server.js"]
