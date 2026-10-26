@@ -1,128 +1,63 @@
-# INTEGRIX IX.VOICE — SHARED DEVKIT & CANONICAL CONTRACTS (`ix-voice-shared`)
+# INTEGRIX IX.VOICE - Central Shared DevKit & Platform Hub
 
-> **Bộ công cụ phát triển & Môi trường dùng chung (Shared DevKit & Environment Hub)**  
-> Dành cho 3 đội ngũ phát triển độc lập: **Frontend (React)**, **Backend (Spring Boot)**, và **AI Service (PhoWhisper)**.  
-> Được nhúng vào repository của từng Role thông qua **Git Submodule**.
+Trung tâm hợp đồng dữ liệu chuẩn hóa (Single Source of Truth), bộ công cụ tự động hóa khởi tạo dự án (1-Click Platform Bootstrap), sinh code DTO (Codegen) và môi trường giả lập (Standalone Mock Servers) cho dự án AI Voice INTEGRIX.
 
 ---
 
-## 1. Cấu trúc của `ix-voice-shared`
+## 🚀 Tính năng nổi bật: 1-Click Platform Bootstrap
+
+Khi bất kỳ role nào (**Frontend**, **Backend**, **AI**) bắt đầu từ một repository mã nguồn thô (chưa có Dockerfile, chưa có CI/CD):
+
+Chỉ cần thực hiện **2 bước**:
+
+```bash
+# Bước 1: Nhúng bộ công cụ Shared làm submodule
+git submodule add https://github.com/lamhoanghai-dang1911/ix-voice-shared.git devkit
+
+# Bước 2: Chạy lệnh Bootstrap theo role của bạn
+./devkit/scripts/setup-env.ps1 -Role frontend -Init
+# hoặc
+./devkit/scripts/setup-env.ps1 -Role backend -Init
+# hoặc
+./devkit/scripts/setup-env.ps1 -Role ai -Init
+```
+
+### ⚙️ Script sẽ tự động thực hiện từ A-Z trong 5 giây:
+1. **Sao chép Dockerfile & Nginx chuẩn Enterprise** tương ứng cho từng công nghệ vào thư mục gốc.
+2. **Cài đặt GitHub Actions CI/CD Pipeline chuẩn** (`.github/workflows/ci.yml`) hỗ trợ test tự động, build multi-stage Docker và deploy Staging/Production.
+3. **Sinh code Type/DTO tự động** từ 4 file JSON Schema chuẩn (`src/types/` cho FE, `model/gen/` cho BE, `app/models/` cho AI).
+4. **Tạo file `.env` & `.env.example`** với cấu hình cổng chuẩn sẵn sàng chạy.
+5. **Hướng dẫn 1-click khởi động Mock Server / PostgreSQL** để bắt đầu dev ngay mà không phụ thuộc vào nhau.
+
+---
+
+## 📁 Cấu trúc kho lưu trữ Shared
 
 ```text
 ix-voice-shared/
-├── schemas/                        # [1] Canonical JSON Schemas (Single Source of Truth)
-│   ├── audio_job_v0_1.json         # Vòng đời & trạng thái Processing Job
-│   ├── transcript_v0_1.json        # Kết quả STT (PhoWhisper) & Speaker Diarization
-│   ├── analysis_emotion_v0_1.json  # Tóm tắt, đối chiếu checklist & tín hiệu âm học
-│   └── evidence_qa_v0_1.json       # Thẩm định chất lượng & kiểm toán tuân thủ (QA)
-│
-├── fixtures/                       # [2] Bộ dữ liệu mẫu chuẩn hóa (Prudential Life Insurance)
-│   ├── mock_audio_job.json
-│   ├── mock_transcript.json
-│   ├── mock_analysis_emotion.json
-│   └── mock_evidence_qa.json
-│
-├── environments/                   # [3] Môi trường giả lập (Mock Services) cho từng Role
-│   ├── frontend-env/               # Mock Backend (Port 8080) -> FE dev KHÔNG CẦN cài Java
-│   │   ├── mock-backend-server.js
-│   │   └── docker-compose.mock-be.yml
-│   └── backend-env/                # Mock AI (Port 5000) -> BE dev KHÔNG CẦN cài Python/GPU
-│       ├── mock-ai-server.js
-│       ├── docker-compose.mock-ai.yml
-│       ├── docker-compose.postgres.yml # PostgreSQL 16 container dựng sẵn
-│       └── init-db/01-schema.sql   # DDL tables: audio_jobs, transcripts, segments
-│
-├── ci-templates/                   # [4] Mẫu GitHub Actions CI cho từng repo
+├── dockerfiles/                    <-- Dockerfile chuẩn Enterprise cho từng Role
+│   ├── Dockerfile.frontend         <-- Node 20 builder + Nginx Alpine
+│   ├── Dockerfile.backend          <-- Java 21 Temurin Alpine + Virtual Threads
+│   └── Dockerfile.ai               <-- Python 3.10 slim + PyTorch + FFmpeg
+├── nginx/
+│   └── nginx.conf                  <-- Nginx SPA routing & reverse proxy /api/
+├── ci-templates/                   <-- Mẫu GitHub Actions CI/CD Enterprise
 │   ├── github-ci-frontend.yml
 │   ├── github-ci-backend.yml
 │   └── github-ci-ai.yml
-│
-├── scripts/                        # [5] Bộ công cụ tự động hóa
-│   ├── setup-env.ps1               # 1-Click thiết lập môi trường theo Role
-│   ├── codegen.ps1                 # 1-Click sinh DTO cho TypeScript, Java, Python
-│   └── download_model.py           # Tải cache model PhoWhisper
-│
-├── package.json                    # Hỗ trợ npm run codegen
-└── README.md
+├── schemas/                        <-- 4 Hợp đồng JSON Schema chuẩn
+│   ├── audio_job_v0_1.json
+│   ├── transcript_v0_1.json
+│   ├── analysis_emotion_v0_1.json
+│   └── evidence_qa_v0_1.json
+├── environments/                   <-- Môi trường giả lập & DB cục bộ
+│   ├── frontend-env/               <-- Mock Backend (port 8080) có Swagger UI
+│   └── backend-env/                <-- Mock AI (port 5000) & PostgreSQL 16 (port 5432)
+└── scripts/
+    ├── setup-env.ps1               <-- 1-Click Platform Bootstrap Wizard
+    ├── codegen.ps1                 <-- Sinh mã DTOs đa ngôn ngữ
+    └── download_model.py           <-- Tải pre-trained weights PhoWhisper
 ```
 
 ---
-
-## 2. Hướng dẫn Dành cho Từng Role (Kịch bản 1 Click)
-
-Khi bạn nhận một repository mới từ tổ chức, hãy làm theo các bước dưới đây để thiết lập môi trường ngay lập tức:
-
-### 2.1. Dành cho Role Frontend (React / TypeScript)
-
-1. **Nhúng DevKit vào repo của bạn (chỉ làm 1 lần)**:
-   ```bash
-   git submodule add https://github.com/lamhoanghai-dang1911/ix-voice-shared.git devkit
-   ```
-2. **Kích hoạt môi trường Frontend**:
-   ```powershell
-   powershell -File .\devkit\scripts\setup-env.ps1 -Role frontend
-   ```
-   *Lệnh này sẽ tự động:*
-   - Sinh toàn bộ TypeScript DTOs vào `src/types/`.
-   - Tạo file `.env.example`.
-3. **Chạy Mock Backend để test UI mà KHÔNG CẦN cài Java**:
-   ```bash
-   node devkit/environments/frontend-env/mock-backend-server.js
-   # Hoặc dùng Docker:
-   docker compose -f devkit/environments/frontend-env/docker-compose.mock-be.yml up -d
-   ```
-   👉 Giao diện React gọi tới `http://localhost:8080/api/v1` sẽ nhận phản hồi ngay lập tức!
-
----
-
-### 2.2. Dành cho Role Backend (Java 21 / Spring Boot 3)
-
-1. **Nhúng DevKit vào repo của bạn**:
-   ```bash
-   git submodule add https://github.com/lamhoanghai-dang1911/ix-voice-shared.git devkit
-   ```
-2. **Kích hoạt môi trường Backend**:
-   ```powershell
-   powershell -File .\devkit\scripts\setup-env.ps1 -Role backend
-   ```
-   *Lệnh này sẽ tự động:*
-   - Sinh toàn bộ Java DTOs (Jackson) vào `src/main/java/.../model/`.
-   - Tạo file `.env.example`.
-3. **Bật Mock AI Service & PostgreSQL 16 (KHÔNG CẦN cài Python / PyTorch / GPU)**:
-   ```bash
-   # Bật Mock AI Service (Port 5000):
-   node devkit/environments/backend-env/mock-ai-server.js
-
-   # Bật PostgreSQL 16 dựng sẵn kèm bảng mẫu (Port 5432):
-   docker compose -f devkit/environments/backend-env/docker-compose.postgres.yml up -d
-   ```
-   👉 Backend Spring Boot gọi `POST http://localhost:5000/api/v1/ai/transcribe` sẽ nhận transcript chuẩn trong mili-giây!
-
----
-
-### 2.3. Dành cho Role AI Service (Python / Speech AI)
-
-1. **Nhúng DevKit vào repo của bạn**:
-   ```bash
-   git submodule add https://github.com/lamhoanghai-dang1911/ix-voice-shared.git devkit
-   ```
-2. **Kích hoạt môi trường AI Service**:
-   ```powershell
-   powershell -File .\devkit\scripts\setup-env.ps1 -Role ai
-   ```
-   *Lệnh này sẽ tự động sinh Pydantic Models vào `app/models/`.*
-3. **Tải cache model PhoWhisper**:
-   ```bash
-   python devkit/scripts/download_model.py
-   ```
-
----
-
-## 3. Cập nhật khi có Hợp đồng Dữ liệu mới
-
-Khi Tech Lead cập nhật JSON Schema trên repo `ix-voice-shared`, các team chỉ cần chạy:
-```bash
-git submodule update --remote devkit
-powershell -File .\devkit\scripts\codegen.ps1
-```
-Lập tức DTO của cả 3 bên đều được đồng bộ lên bản mới nhất!
+© 2026 INTEGRIX Solution. All rights reserved.
